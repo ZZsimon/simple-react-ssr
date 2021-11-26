@@ -12,6 +12,7 @@ const getData = () => {
             }, 1000)
         }).then((data) => {
             dispatch({ type: 'CHANGE_LIST', list: data })
+            dispatch({ type: '', data: {name:'simon'} })
         })
     }
 }
@@ -24,7 +25,9 @@ class Login extends React.Component {
 
     //在componentDidMount中发送异步请求
     componentDidMount() {
-        // this.props.getList()
+        if(this.props.list.length===0){
+            this.props.getList()
+        }
     }
 
     render() {
@@ -34,11 +37,11 @@ class Login extends React.Component {
                 <h2>store中的数据：{this.props.name}</h2>
 
                 {this.props.list ?
-                    <h4>
+                    <div>
                         {this.props.list.map(item => (
-                            <div key={item}>{item}</div>
+                            <h4 key={item}>{item}</h4>
                         ))}
-                    </h4> : ''}
+                    </div> : null}
             </div>
         )
     }

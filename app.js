@@ -52,7 +52,14 @@ app.get('*', (req, res) => {
         // 于是需要引用一段新的js代码用来 做客户端渲染
         // 这段客户端代码通过webpack打包后放在了一个目录中，我们只需要引用它即可
         res.send(`
-        <body><div id='root'>${content}</div><script src="/index.js"></script></body>
+        <script>
+            window.INIT_STATE = ${JSON.stringify(store.getState())}
+        </script>
+        <body>
+            <div id='root'>${content}</div>
+            <script src="/index.js"></script>
+            
+        </body>
         `)
     })
 

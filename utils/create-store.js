@@ -1,7 +1,7 @@
 import { createStore,applyMiddleware } from'redux'
 import thunk from 'redux-thunk'
 
-const reducer = (state = { name:'simon',list:[] }, action) => {
+const reducer = (state = { }, action) => {
     let _state
     switch (action.type) {
         case 'CHANGE_LIST':
@@ -11,13 +11,14 @@ const reducer = (state = { name:'simon',list:[] }, action) => {
             }
             break 
         default:
-            _state= {...state}
+            _state= {...state,...action.data}
     }
     return _state
 }
 
 const getStore = () => {
-    return createStore(reducer,applyMiddleware(thunk))
+    const initState=typeof window !== "undefined" && window.INIT_STATE ?window.INIT_STATE:{}
+    return createStore(reducer,initState,applyMiddleware(thunk))
 }
 
 export default getStore

@@ -1,4 +1,4 @@
-import Home from '../view/demo';
+import Home from '../view/Home';
 import Login from '../view/Login';
 
 export default [
